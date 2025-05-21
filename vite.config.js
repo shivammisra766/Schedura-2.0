@@ -10,4 +10,5 @@ plugins: [
 react(),
 tailwindcss(),
 ],
+server:{port:5173}
 });
