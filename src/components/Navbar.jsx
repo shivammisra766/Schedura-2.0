@@ -3,12 +3,20 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets_frontend/assets'
 import MyProfile from '../pages/MyProfile';
 import MyAppointments from '../pages/MyAppointments';
+import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const {token, setToken}
+ = useContext(AppContext);
   const [showMenu, setShowMenu] = React.useState(false);
-  const [token, setToken] = React.useState(true);
+  const logout =() => {
+    setToken(false)
+    localStorage.removeItem('token')
+  }
+  
+  
 
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400' >
@@ -40,7 +48,7 @@ const Navbar = () => {
               <div className='min-w-[120px] bg-stone-100 rounded flex flex-col gap-3 p-3'>
                 <p onClick={() => useNavigate(MyProfile)} className='hover:text-black hover:bg-gray-200 cursor-pointer rounded px-2 py-1 transition-colors duration-200'>Profile</p>
                 <p onClick={() => useNavigate(MyAppointments)} className='hover:text-black hover:bg-gray-200 cursor-pointer rounded px-2 py-1 transition-colors duration-200'>Appointments</p>
-                <p onClick={() => setToken(false)} className='hover:text-black hover:bg-gray-200 cursor-pointer rounded px-2 py-1 transition-colors duration-200'>LogOut</p>
+                <p onClick={logout} className='hover:text-black hover:bg-gray-200 cursor-pointer rounded px-2 py-1 transition-colors duration-200'>LogOut</p>
               </div>
             </div>
           </div>
